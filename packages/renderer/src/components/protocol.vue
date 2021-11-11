@@ -49,7 +49,7 @@
                 >{{ scope.row.regx }}{{ getArgumentValue(scope.row.name).regx }}</template>
               </el-table-column>
               <el-table-column prop="bl" label="bl" width="50"></el-table-column>
-              <el-table-column prop="enName" label="值"  width="100">
+              <el-table-column prop="enName" label="值" width="100">
                 <template #default="scope">{{ getArgumentValue(scope.row.name).value }}</template>
               </el-table-column>
               <el-table-column prop="unit" label="unit" show-overflow-tooltip width="50"></el-table-column>
@@ -102,6 +102,14 @@ export default defineComponent({
 
     const protocolSetup = reactive<Pick<Uart.ProtocolConstantThreshold, 'OprateInstruct'>>({ OprateInstruct: [] })
 
+    const devs: { [x in string]: string } = {
+      "air": "空调",
+      "ups": "UPS",
+      "io": "io",
+      "th": "温湿度",
+      "em": "电量仪"
+    }
+
 
 
     // 格式化协议选择
@@ -110,7 +118,7 @@ export default defineComponent({
       if (protocolArray) {
         const types = new Set(protocolArray.map(el => el.ProtocolType))
         return [...types].map<CascaderOption>(el => ({
-          label: el, value: el, children: protocolArray
+          label: devs[el] || el, value: el, children: protocolArray
             .filter(el1 => el1.ProtocolType === el)
             .map(el2 => ({ label: el2.Protocol, value: el2.Protocol }))
         }))
