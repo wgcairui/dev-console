@@ -1,0 +1,58 @@
+{
+  "name": "dev-console",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=v16",
+    "npm": ">=8.1"
+  },
+  "author": "wgcairui",
+  "description": "ladis用户设备控制",
+  "main": "packages/main/dist/index.cjs",
+  "scripts": {
+    "dev": "node scripts/watch.js",
+    "build": "node scripts/build.js",
+    "precompile": "cross-env MODE=production npm run build",
+    "compile": "npm run precompile && electron-builder build  --config electron-builder.config.js --dir --config.asar=true",
+    "pretest": "npm run build",
+    "test": "node tests/app.spec.js",
+    "lint": "eslint . --ext js,ts,vue",
+    "rebuild": "electron-rebuild",
+    "postinstall": "electron-builder install-app-deps",
+    "typecheck-main": "tsc --noEmit -p packages/main/tsconfig.json",
+    "typecheck-preload": "tsc --noEmit -p packages/preload/tsconfig.json",
+    "typecheck-renderer": "vue-tsc --noEmit -p packages/renderer/tsconfig.json",
+    "typecheck": "npm run typecheck-main && npm run typecheck-preload && npm run typecheck-renderer"
+  },
+  "browserslist": [
+    "Chrome 94"
+  ],
+  "lint-staged": {
+    "*.{js,ts,vue}": "eslint --cache --fix"
+  },
+  "devDependencies": {
+    "@types/crc": "^3.4.0",
+    "@types/electron-devtools-installer": "2.2.0",
+    "@types/serialport": "^8.0.2",
+    "@typescript-eslint/eslint-plugin": "5.3.0",
+    "@vitejs/plugin-vue": "1.9.4",
+    "cross-env": "7.0.3",
+    "electron": "15.3.0",
+    "electron-builder": "22.13.1",
+    "electron-devtools-installer": "3.2.0",
+    "electron-packager": "^15.4.0",
+    "electron-rebuild": "^3.2.3",
+    "types-uart": "^1.1.7",
+    "vite": "2.6.13",
+    "vue-tsc": "0.28.10"
+  },
+  "dependencies": {
+    "@serialport/parser-inter-byte-timeout": "^9.2.4",
+    "crc": "^3.8.0",
+    "electron-updater": "4.6.1",
+    "element-plus": "^1.2.0-beta.1",
+    "serialport": "9.2.4",
+    "vue": "3.2.20",
+    "vue-router": "4.0.12"
+  }
+}

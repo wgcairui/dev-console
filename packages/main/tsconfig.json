@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "allowSyntheticDefaultImports":true,
+    "paths": {
+      "/@/*": [
+        "./src/*"
+      ]
+    },
+    "types": [
+      "types-uart"
+    ]
+  },
+  "files": [
+    "src/index.ts"
+  ],
+  "include": [
+    "../../types/**/*.d.ts"
+  ]
+}
