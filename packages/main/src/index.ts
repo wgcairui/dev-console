@@ -29,9 +29,12 @@ let mainWindow: BrowserWindow | null = null;
 const createWindow = async () => {
 
   const { width, height } = screen.getPrimaryDisplay().workArea
+  console.log({ width, height });
+  
   mainWindow = new BrowserWindow({
     show: false, // Use 'ready-to-show' event to show window
-    width, height,
+    width: width < 1024 ? width : 1024,
+    height: width < 1024 ? height : 768,
     webPreferences: {
       nativeWindowOpen: true,
       preload: join(__dirname, '../../preload/dist/index.cjs'),
@@ -41,9 +44,9 @@ const createWindow = async () => {
   ipcEvent.attch(app, mainWindow)
 
   console.log(
-    
+
   );
-  
+
   /**
    * If you install `show: true` then it can cause issues when trying to close the window.
    * Use `show: false` and listener events `ready-to-show` to fix these issues.

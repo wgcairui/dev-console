@@ -1,5 +1,5 @@
 <template>
-  <el-row>
+  <el-row style="flex: 1;overflow: auto;">
     <el-col :span="8" :lg="6">
       <el-form label-width="100px" label-suffix=":" size="small">
         <el-form-item label="协议">
@@ -31,7 +31,7 @@
       </el-form>
     </el-col>
     <el-col :span="16" :lg="18" style="padding-left:2rem">
-      <el-card style="height:200px;overflow:auto">
+      <el-card style="height:100%;overflow:auto; overflow: auto;">
         <el-tabs v-model="tabActive">
           <el-tab-pane label="操作指令" name="1">
             <el-form label-width="100px" label-suffix=":" size="small" inline>
@@ -41,18 +41,18 @@
             </el-form>
           </el-tab-pane>
           <el-tab-pane label="设备参数" v-if="InstructItem && InstructItem.formResize" name="2">
-            <el-table :data="InstructItem.formResize" size="small" @cell-click="tableClick">
-              <el-table-column prop="name" label="name"></el-table-column>
-              <el-table-column prop="regx" label="字段">
+            <el-table :data="InstructItem.formResize" size="small" @cell-click="tableClick" stripe>
+              <el-table-column prop="name" label="name" show-overflow-tooltip></el-table-column>
+              <el-table-column prop="regx" label="字段/取值" width="100">
                 <template
                   #default="scope"
                 >{{ scope.row.regx }}{{ getArgumentValue(scope.row.name).regx }}</template>
               </el-table-column>
-              <el-table-column prop="bl" label="bl"></el-table-column>
-              <el-table-column prop="enName" label="值">
+              <el-table-column prop="bl" label="bl" width="50"></el-table-column>
+              <el-table-column prop="enName" label="值"  width="100">
                 <template #default="scope">{{ getArgumentValue(scope.row.name).value }}</template>
               </el-table-column>
-              <el-table-column prop="unit" label="unit"></el-table-column>
+              <el-table-column prop="unit" label="unit" show-overflow-tooltip width="50"></el-table-column>
             </el-table>
             <el-button type="text" @click="addIntructFrom">添加</el-button>
           </el-tab-pane>

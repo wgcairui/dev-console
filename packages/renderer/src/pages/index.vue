@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main style="display: flex;flex-direction: column;height: 100%;">
         <protocol
             @loadConsole="loadConsole"
             @updateInstructItem="loadInstructItem"
@@ -106,7 +106,7 @@
                     type="textarea"
                     resize="none"
                     placeholder="显示区"
-                    :rows="6"
+                    :rows="4"
                     v-model="outContent"
                     readonly
                 ></el-input>
@@ -118,14 +118,14 @@
                     :fetch-suggestions="querySearch"
                     class="block"
                     show-word-limit
-                    style="display:block;margin:1rem 0"
+                    style="display:block;margin:0.4rem 0"
                 ></el-autocomplete>
                 <div class="send">
                     <el-button :disabled="!com" size="small" @click="portWrite" type="primary">手动发送</el-button>
                     <span size="small" type="text" style="margin:0 1rem;">Tx: {{ datas.pushBit }}</span>
                     <span size="small" type="text" style="margin:0 1rem;">Rx: {{ datas.pullBit }}</span>
                 </div>
-                <el-form label-suffix=":" size="small">
+                <el-form label-suffix=":" size="mini">
                     <el-form-item label="发送">
                         <el-checkbox v-model="Opt.hexSend">hex发送</el-checkbox>
                         <el-checkbox v-model="Opt.logSend">记录发送</el-checkbox>
@@ -494,9 +494,9 @@ const loadInstructItem = (item: Uart.protocolInstruct) => {
 .send {
     display: flex;
     align-items: center;
-}s
-
-.el-dialog__body {
+    margin: .9rem 0;
+}
+s .el-dialog__body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
